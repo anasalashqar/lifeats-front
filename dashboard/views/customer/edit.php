@@ -84,81 +84,87 @@
           </form>
         </div>
       </div>
-
-
-      <script>
-        // Get ?id= from the URL
-        function getQueryParam(key) {
-          const url = new URLSearchParams(window.location.search);
-          return url.get(key);
-        }
-
-        const userId = getQueryParam('id');
-        const form = document.getElementById('editUserForm');
-
-        if (userId) {
-          fetch(`http://127.0.0.1:8000/api/admin/users/${userId}`)
-            .then(res => res.json())
-            .then(user => {
-              form.elements['id'].value = user.id;
-              form.elements['name'].value = user.name;
-              form.elements['email'].value = user.email;
-              form.elements['phone'].value = user.phone || '';
-              form.elements['address'].value = user.address || '';
-              form.elements['role'].value = user.role || 'user';
-              form.elements['preferences'].value = user.preferences || '';
-              form.elements['allergies'].value = user.allergies || '';
-              form.elements['password'].value = user.password; // unchanged
-            })
-            .catch(err => {
-              console.error('Failed to load user:', err);
-              alert('Error loading customer data');
-            });
-        } else {
-          alert('No customer ID provided.');
-        }
-
-        form.addEventListener('submit', function(e) {
-          e.preventDefault();
-
-          const formData = new FormData(form);
-          const data = {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            phone: formData.get('phone'),
-            address: formData.get('address'),
-            role: formData.get('role'),
-            preferences: formData.get('preferences'),
-            allergies: formData.get('allergies'),
-            password: formData.get('password') // required by backend
-          };
-
-          fetch(`http://127.0.0.1:8000/api/admin/users/${userId}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data)
-            })
-            .then(res => {
-              if (!res.ok) throw new Error('Failed to update user');
-              return res.json();
-            })
-            .then(result => {
-              alert('Customer updated successfully!');
-              window.location.href = 'index.php?page=customers/index';
-            })
-            .catch(err => {
-              console.error('Update failed:', err);
-              alert('Failed to update customer.');
-            });
-        });
-      </script>
-
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
+
+  <script>
+    // Get ?id= from the URL
+    function getQueryParam(key) {
+      const url = new URLSearchParams(window.location.search);
+      return url.get(key);
+    }
+
+    const userId = getQueryParam('id');
+    const form = document.getElementById('editUserForm');
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+
+    if (userId) {
+      spinnerOverlay.style.display = 'block';
+      fetch(`http://127.0.0.1:8000/api/admin/users/${userId}`)
+        .then(res => res.json())
+        .then(user => {
+          form.elements['id'].value = user.id;
+          form.elements['name'].value = user.name;
+          form.elements['email'].value = user.email;
+          form.elements['phone'].value = user.phone || '';
+          form.elements['address'].value = user.address || '';
+          form.elements['role'].value = user.role || 'user';
+          form.elements['preferences'].value = user.preferences || '';
+          form.elements['allergies'].value = user.allergies || '';
+          form.elements['password'].value = user.password; // unchanged
+        })
+        .catch(err => {
+          console.error('Failed to load user:', err);
+          alert('Error loading customer data');
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
+        })
+    } else {
+      alert('No customer ID provided.');
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        address: formData.get('address'),
+        role: formData.get('role'),
+        preferences: formData.get('preferences'),
+        allergies: formData.get('allergies'),
+        password: formData.get('password') // required by backend
+      };
+      spinnerOverlay.style.display = 'block';
+      fetch(`http://127.0.0.1:8000/api/admin/users/${userId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        })
+        .then(res => {
+          if (!res.ok) throw new Error('Failed to update user');
+          return res.json();
+        })
+        .then(result => {
+          alert('Customer updated successfully!');
+          window.location.href = 'index.php?page=customers/index';
+        })
+        .catch(err => {
+          console.error('Update failed:', err);
+          alert('Failed to update customer.');
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
+        });
+    })
+  </script>
+
+
 
   <!--   Core JS Files   -->
   <?php require "views/layouts/components/scripts.html"; ?>

@@ -50,6 +50,7 @@
 
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -64,13 +65,13 @@
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-
+      const spinnerOverlay = document.getElementById('spinner-overlay');
       const formData = new FormData(form);
       const data = {
         name: formData.get('name'),
         image: formData.get('image')
       };
-
+      spinnerOverlay.style.display = 'block';
       fetch('http://127.0.0.1:8000/api/admin/meal-categories', {
           method: 'POST',
           headers: {
@@ -83,11 +84,14 @@
           return res.json();
         })
         .then(response => {
-          messageDiv.innerHTML = `<div class="alert alert-success">Category created successfully!</div>`;
+          alert("add is successful");
+          window.location.href = "index.php?page=meal-categories/index"
           form.reset();
         })
         .catch(error => {
           messageDiv.innerHTML = `<div class="alert alert-danger">Error: ${error.message}</div>`;
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     });
   </script>

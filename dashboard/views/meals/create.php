@@ -84,56 +84,65 @@
         </div>
       </div>
 
-      <script>
-        document.getElementById('createMealForm').addEventListener('submit', function(e) {
-          e.preventDefault();
 
-          const form = e.target;
-
-          const newMeal = {
-            name: form.name.value,
-            description: form.description.value,
-            calories: parseInt(form.calories.value),
-            protein: parseInt(form.protein.value),
-            carbs: parseInt(form.carbs.value),
-            fats: parseInt(form.fats.value),
-            image_url: form.image_url.value,
-            category_id: parseInt(form.category_id.value)
-          };
-
-          fetch('http://127.0.0.1:8000/api/admin/meals', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(newMeal)
-            })
-            .then(async res => {
-              const data = await res.json();
-
-              if (!res.ok) {
-                // Handle API validation errors (422 or others)
-                console.error('API Error:', data);
-                alert("Error: " + (data.message || "Validation failed."));
-                return;
-              }
-
-              alert("Meal created successfully!");
-              window.location.href = 'index.php?page=meals/index';
-            })
-            .catch(err => {
-              console.error("Network or JS Error:", err);
-              alert("Something went wrong while creating the meal.");
-            });
-        });
-      </script>
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
 
   <!--   Core JS Files   -->
   <?php require "views/layouts/components/scripts.html"; ?>
+
+  <script>
+    document.getElementById('createMealForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const spinnerOverlay = document.getElementById('spinner-overlay');
+      spinnerOverlay.style.display = 'block'; // Show spinner
+
+      const form = e.target;
+
+      const newMeal = {
+        name: form.name.value,
+        description: form.description.value,
+        calories: parseInt(form.calories.value),
+        protein: parseInt(form.protein.value),
+        carbs: parseInt(form.carbs.value),
+        fats: parseInt(form.fats.value),
+        image_url: form.image_url.value,
+        category_id: parseInt(form.category_id.value)
+      };
+
+      fetch('http://127.0.0.1:8000/api/admin/meals', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newMeal)
+        })
+        .then(async res => {
+          const data = await res.json();
+
+          if (!res.ok) {
+            console.error('API Error:', data);
+            alert("Error: " + (data.message || "Validation failed."));
+            return;
+          }
+
+          alert("Meal created successfully!");
+          window.location.href = 'index.php?page=meals/index';
+        })
+        .catch(err => {
+          console.error("Network or JS Error:", err);
+          alert("Something went wrong while creating the meal.");
+        })
+        .finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
+        });
+    });
+  </script>
+
 </body>
 
 </html>

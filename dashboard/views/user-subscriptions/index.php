@@ -71,6 +71,7 @@
       </div>
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -79,6 +80,8 @@
   <?php require "views/layouts/components/scripts.html"; ?>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+    spinnerOverlay.style.display = 'block';
     fetch("http://127.0.0.1:8000/api/admin/user-subscriptions")
       .then(res => {
         if (!res.ok) throw new Error("Failed to load subscriptions");
@@ -116,6 +119,8 @@
         document.getElementById("subscription-table-body").innerHTML = `
         <tr><td colspan="7" class="text-danger text-center">${err.message}</td></tr>
       `;
+      }).finally(() => {
+        spinnerOverlay.style.display = 'none'; // Hide spinner
       });
 
     function formatStatus(status) {
@@ -142,7 +147,7 @@
     function deleteSubscription(event, id) {
       event.preventDefault();
       if (!confirm("Are you sure you want to delete this subscription?")) return;
-
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/user-subscriptions/${id}`, {
           method: 'DELETE',
           headers: {
@@ -156,6 +161,8 @@
         })
         .catch(err => {
           alert("Error: " + err.message);
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     }
   </script>

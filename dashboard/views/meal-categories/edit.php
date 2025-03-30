@@ -58,6 +58,7 @@
       </div>
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -68,8 +69,9 @@
 
     const form = document.getElementById('editMealCategoryForm');
     const messageDiv = document.getElementById('edit-message');
-
+    const spinnerOverlay = document.getElementById('spinner-overlay');
     // Prefill data
+    spinnerOverlay.style.display = 'block';
     fetch(`http://127.0.0.1:8000/api/admin/meal-categories/${categoryId}`)
       .then(res => {
         if (!res.ok) throw new Error("Category not found");
@@ -87,6 +89,8 @@
       })
       .catch(error => {
         messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+      }).finally(() => {
+        spinnerOverlay.style.display = 'none'; // Hide spinner
       });
 
     // Handle update submit
@@ -98,6 +102,7 @@
         image: document.getElementById('category-image').value
       };
 
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/meal-categories/${categoryId}`, {
           method: 'PUT',
           headers: {
@@ -110,10 +115,12 @@
           return res.json();
         })
         .then(response => {
-          messageDiv.innerHTML = `<div class="alert alert-success">Category updated successfully!</div>`;
+          window.location.href = "index.php?page=meal-categories/index"
         })
         .catch(error => {
           messageDiv.innerHTML = `<div class="alert alert-danger">${error.message}</div>`;
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     });
   </script>

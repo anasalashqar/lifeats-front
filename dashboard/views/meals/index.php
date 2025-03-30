@@ -66,6 +66,8 @@
 
       <!-- Footer -->
       <?php require_once "views/layouts/components/footer.html"; ?>
+      <?php require_once "views/layouts/components/spinner.html"; ?>
+
     </div>
   </div>
 
@@ -77,6 +79,7 @@
     const itemsPerPage = 5;
     let currentPage = 1;
     let mealsData = [];
+    const spinnerOverlay = document.getElementById('spinner-overlay');
 
     function renderTablePage(page) {
       const tbody = document.getElementById('meals-table-body');
@@ -131,6 +134,7 @@
       }
     });
 
+    spinnerOverlay.style.display = 'block'; // Show spinner immediately
     // Initial fetch
     fetch("http://127.0.0.1:8000/api/admin/meals")
       .then(res => res.json())
@@ -140,7 +144,9 @@
       })
       .catch(err => {
         console.error('Failed to load meals:', err);
-      });
+      }).finally(() => {
+        spinnerOverlay.style.display = 'none';
+      })
   </script>
 
 </body>

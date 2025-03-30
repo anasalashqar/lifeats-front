@@ -85,6 +85,7 @@
 
 
             <!-- Footer -->
+            <?php require_once "views/layouts/components/spinner.html"; ?>
             <?php require_once "views/layouts/components/footer.html"; ?>
         </div>
     </div>
@@ -102,6 +103,8 @@
         const scheduleId = getQueryParam('id');
 
         if (scheduleId) {
+            const spinnerOverlay = document.getElementById('spinner-overlay');
+            spinnerOverlay.style.display = 'block';
             fetch(`http://127.0.0.1:8000/api/admin/meal-schedules/${scheduleId}`)
                 .then(res => res.json())
                 .then(schedule => {
@@ -169,6 +172,8 @@
                 .catch(err => {
                     console.error('Error loading schedule:', err);
                     alert('Failed to load meal schedule.');
+                }).finally(() => {
+                    spinnerOverlay.style.display = 'none'; // Hide spinner
                 });
         } else {
             alert('No schedule ID provided.');

@@ -65,7 +65,8 @@
       </div>
 
 
-      <!-- Footer -->
+      <!-- Footer -->\
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -78,10 +79,12 @@
       const url = new URLSearchParams(window.location.search);
       return url.get(key);
     }
+    const spinnerOverlay = document.getElementById('spinner-overlay');
 
     const userId = getQueryParam('id');
 
     if (userId) {
+      spinnerOverlay.style.display = 'block';
       // Fetch user info
       fetch(`http://127.0.0.1:8000/api/admin/users/${userId}`)
         .then(res => res.json())
@@ -96,8 +99,11 @@
         .catch(err => {
           console.error('Error fetching user:', err);
           alert('Could not load customer info.');
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
 
+      spinnerOverlay.style.display = 'block';
       // Fetch user subscriptions
       fetch(`http://127.0.0.1:8000/api/admin/user-subscriptions`)
         .then(res => res.json())
@@ -132,6 +138,8 @@
         .catch(err => {
           console.error('Error fetching subscriptions:', err);
           document.getElementById('subscriptions-table-body').innerHTML = '<tr><td colspan="5">Failed to load subscriptions.</td></tr>';
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     } else {
       alert('No customer ID provided.');

@@ -32,7 +32,7 @@
       <div class="container">
         <div class="page-inner">
           <h1>Meal Categories List</h1>
-          <a href="index.php?controller=mealCategory&action=create" class="btn btn-primary my-2">Add New Category</a>
+          <a href="index.php?page=meal-categories/create" class="btn btn-primary my-2">Add New Category</a>
           <form action="index.php?controller=mealCategory&action=search" method="POST" class="form-inline my-2 d-flex">
             <input type="text" name="keyword" class="form-control" placeholder="Search for categories">
             <button type="submit" class="btn btn-primary">Search</button>
@@ -54,6 +54,7 @@
       </div>
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -64,6 +65,8 @@
   <?php require "views/layouts/components/scripts.html"; ?>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+    spinnerOverlay.style.display = 'block';
     fetch("http://127.0.0.1:8000/api/admin/meal-categories")
       .then(res => res.json())
       .then(categories => {
@@ -90,6 +93,8 @@
       })
       .catch(err => {
         console.error('Failed to load meal categories:', err);
+      }).finally(() => {
+        spinnerOverlay.style.display = 'none'; // Hide spinner
       });
 
     function deleteCategory(event, categoryId) {
@@ -99,6 +104,7 @@
         return false;
       }
 
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/meal-categories/${categoryId}`, {
           method: 'DELETE',
           headers: {
@@ -115,6 +121,8 @@
         })
         .catch(error => {
           alert("Error: " + error.message);
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
 
       return false; // prevent default form action

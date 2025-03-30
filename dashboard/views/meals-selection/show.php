@@ -70,6 +70,7 @@
 
             <!-- Footer -->
             <?php require_once "views/layouts/components/footer.html"; ?>
+            <?php require_once "views/layouts/components/spinner.html"; ?>
         </div>
     </div>
 
@@ -78,6 +79,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        const spinnerOverlay = document.getElementById('spinner-overlay');
+
         function getQueryParam(key) {
             const url = new URLSearchParams(window.location.search);
             return url.get(key);
@@ -86,6 +89,7 @@
         const selectionId = getQueryParam('id');
 
         if (selectionId) {
+            spinnerOverlay.style.display = 'block';
             fetch(`http://127.0.0.1:8000/api/admin/meal-selections/${selectionId}`)
                 .then(res => res.json())
                 .then(data => {
@@ -110,6 +114,8 @@
                 .catch(err => {
                     console.error('Error loading meal selection:', err);
                     alert('Failed to load meal selection details.');
+                }).finally(() => {
+                    spinnerOverlay.style.display = 'none'; // Hide spinner
                 });
         } else {
             alert('No selection ID provided in URL.');

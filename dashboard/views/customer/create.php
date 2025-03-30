@@ -87,6 +87,7 @@
             </div>
 
             <!-- Footer -->
+            <?php require_once "views/layouts/components/spinner.html"; ?>
             <?php require_once "views/layouts/components/footer.html"; ?>
         </div>
 
@@ -98,6 +99,7 @@
 
                 const form = e.target;
                 const formData = new FormData(form);
+                const spinnerOverlay = document.getElementById('spinner-overlay');
 
                 const userData = {
                     name: formData.get('name'),
@@ -109,7 +111,7 @@
                     allergies: formData.get('allergies'),
                     password: formData.get('password'),
                 };
-
+                spinnerOverlay.style.display = 'block';
                 fetch('http://127.0.0.1:8000/api/admin/users', {
                         method: 'POST',
                         headers: {
@@ -129,6 +131,8 @@
                     .catch(err => {
                         console.error(err);
                         alert('Something went wrong');
+                    }).finally(() => {
+                        spinnerOverlay.style.display = 'none'; // Hide spinner
                     });
             });
         </script>

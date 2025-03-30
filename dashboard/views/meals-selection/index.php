@@ -59,6 +59,7 @@
             </div>
 
             <!-- Footer -->
+            <?php require_once "views/layouts/components/spinner.html"; ?>
             <?php require_once "views/layouts/components/footer.html"; ?>
         </div>
     </div>
@@ -69,6 +70,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const spinnerOverlay = document.getElementById('spinner-overlay');
+            spinnerOverlay.style.display = 'block';
             fetch('http://127.0.0.1:8000/api/admin/meal-selections')
                 .then(res => res.json())
                 .then(data => {
@@ -100,6 +103,8 @@
                 })
                 .catch(err => {
                     console.error('Failed to load meal selections:', err);
+                }).finally(() => {
+                    spinnerOverlay.style.display = 'none'; // Hide spinner
                 });
         });
     </script>

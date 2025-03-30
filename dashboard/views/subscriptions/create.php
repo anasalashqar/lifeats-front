@@ -79,6 +79,8 @@
 
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
+
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -101,6 +103,9 @@
         active: parseInt(formData.get('active')),
       };
 
+      const spinnerOverlay = document.getElementById('spinner-overlay');
+      spinnerOverlay.style.display = 'block';
+
       fetch('http://127.0.0.1:8000/api/admin/subscriptions', {
           method: 'POST',
           headers: {
@@ -118,13 +123,16 @@
         .then(result => {
           alert('Subscription created successfully!');
           form.reset(); // optional
+          document.location.href = "index.php?page=subscriptions/index";
           // Optionally redirect or update UI
           // window.location.href = 'subscriptions.html';
         })
         .catch(error => {
           console.error(error);
           alert('Error creating subscription');
-        });
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none';
+        })
     });
   </script>
 

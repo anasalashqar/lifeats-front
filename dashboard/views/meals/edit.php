@@ -86,10 +86,14 @@ if (!$mealId) {
   </div>
 
   <!--   Core JS Files   -->
+  <?php require_once "views/layouts/components/spinner.html"; ?>
   <?php require "views/layouts/components/scripts.html"; ?>
 
   <script>
     const id = document.getElementById("mealId").value;
+
+    const spinnerOverlay = document.getElementById('spinner-overlay');
+    spinnerOverlay.style.display = 'block';
 
     // Load meal data
     fetch(`http://127.0.0.1:8000/api/admin/meals/${id}`)
@@ -101,7 +105,10 @@ if (!$mealId) {
         document.getElementById('mealProtein').value = meal.protein;
         document.getElementById('mealCarbs').value = meal.carbs;
         document.getElementById('mealFats').value = meal.fats;
+      }).finally(() => {
+        spinnerOverlay.style.display = 'none'; // Hide spinner
       });
+
 
     // Update meal on form submit
     document.getElementById('mealForm').addEventListener('submit', function(e) {
@@ -115,7 +122,7 @@ if (!$mealId) {
         carbs: parseInt(document.getElementById('mealCarbs').value),
         fats: parseInt(document.getElementById('mealFats').value),
       };
-
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/meals/${id}`, {
           method: 'PUT',
           headers: {
@@ -131,6 +138,8 @@ if (!$mealId) {
         .catch(err => {
           console.error('Error updating meal:', err);
           alert('Something went wrong.');
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     });
   </script>

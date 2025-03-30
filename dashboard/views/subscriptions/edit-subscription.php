@@ -77,6 +77,7 @@
 
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -95,6 +96,7 @@
 
     // Fetch subscription and populate form
     if (subscriptionId) {
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/subscriptions/${subscriptionId}`)
         .then(res => res.json())
         .then(data => {
@@ -109,7 +111,9 @@
         .catch(err => {
           console.error('Error loading subscription:', err);
           alert('Failed to load subscription data.');
-        });
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none';
+        })
     } else {
       alert('No subscription ID provided in URL.');
     }
@@ -127,6 +131,7 @@
         active: parseInt(form.elements['active'].value),
       };
 
+      spinnerOverlay.style.display = 'block'; // Show spinner immediately
       fetch(`http://127.0.0.1:8000/api/admin/subscriptions/${subscriptionId}`, {
           method: 'PUT',
           headers: {
@@ -146,7 +151,9 @@
         .catch(err => {
           console.error('Update error:', err);
           alert('Error updating subscription');
-        });
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none';
+        })
     });
   </script>
 

@@ -1,23 +1,90 @@
 <script src="assets/js/plugin/webfont/webfont.min.js"></script>
 <script>
-    WebFont.load({
+  WebFont.load({
     google: { families: ["Public Sans:300,400,500,600,700"] },
     custom: {
-        families: [
+      families: [
         "Font Awesome 5 Solid",
         "Font Awesome 5 Regular",
         "Font Awesome 5 Brands",
         "simple-line-icons",
-        ],
-        urls: ["assets/css/fonts.min.css"],
+      ],
+      urls: ["assets/css/fonts.min.css"],
     },
     active: function () {
-        sessionStorage.fonts = true;
+      sessionStorage.fonts = true;
     },
-    });
+  });
 </script>
 
 <!-- CSS Files -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 <link rel="stylesheet" href="assets/css/plugins.min.css" />
 <link rel="stylesheet" href="assets/css/kaiadmin.min.css" />
+
+<style>
+  #spinner-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: none; /* Default hidden */
+    justify-content: center;
+    align-items: center;
+    pointer-events: all;
+    background: transparent;
+  }
+
+  .spinner-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(2px);
+    z-index: 1;
+  }
+
+  .spinner-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    top: 50%;
+  }
+
+  .spinner-border {
+    width: 80px;
+    height: 80px;
+    border-width: 6px;
+    border-color: #ff691c transparent #ff691c transparent;
+    animation: spinner-rotate 1s linear infinite;
+    border-radius: 50%;
+  }
+
+  .spinner-icon {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    pointer-events: none;
+    object-fit: cover;
+  }
+
+  .text-orange {
+    color: #ff691c !important;
+  }
+
+  @keyframes spinner-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>

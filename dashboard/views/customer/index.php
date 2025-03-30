@@ -58,6 +58,7 @@
       </div>
 
       <!-- Footer -->
+      <?php require_once "views/layouts/components/spinner.html"; ?>
       <?php require_once "views/layouts/components/footer.html"; ?>
     </div>
   </div>
@@ -67,8 +68,10 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     let users = [];
+    const spinnerOverlay = document.getElementById('spinner-overlay');
 
     function fetchUsers() {
+      spinnerOverlay.style.display = 'block';
       fetch('http://127.0.0.1:8000/api/admin/users')
         .then(res => res.json())
         .then(data => {
@@ -77,13 +80,15 @@
         })
         .catch(err => {
           console.error('Error fetching users:', err);
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     }
 
     function renderUsers(userList) {
       const tbody = document.getElementById('users-table-body');
       tbody.innerHTML = '';
-
+      const spinnerOverlay = document.getElementById('spinner-overlay');
       userList.forEach(user => {
         const tr = document.createElement('tr');
         tr.id = `user-row-${user.id}`;
@@ -117,6 +122,7 @@
     }
 
     function deleteUser(id) {
+      spinnerOverlay.style.display = 'block';
       fetch(`http://127.0.0.1:8000/api/admin/users/${id}`, {
           method: 'DELETE',
           headers: {
@@ -131,6 +137,8 @@
         .catch(err => {
           console.error('Error deleting user:', err);
           alert('Failed to delete user');
+        }).finally(() => {
+          spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     }
 

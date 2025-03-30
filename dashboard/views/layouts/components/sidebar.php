@@ -26,42 +26,13 @@
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
-        <li class="nav-item">
-          <a
-            href="index.php?controller=dashboard&action=index"
-            class="collapsed"
-            aria-expanded="false">
-            <i class="fas fa-home"></i>
-            <p>Home</p>
-          </a>
-        </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
           </span>
-          <h4 class="text-section">Sections</h4>
+          <h4 class="text-section">Admin Sections</h4>
         </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#mealsMenu">
-            <i class="fas fa-utensils"></i>
-            <p>Meals</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="mealsMenu">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="index.php?page=meals/index">
-                  <span class="sub-item">All Meals</span>
-                </a>
-              </li>
-              <li>
-                <a href="index.php?page=meals/create">
-                  <span class="sub-item">Create New Meal</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
+
 
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#orders">
@@ -144,6 +115,68 @@
         </li>
 
 
+
+
+
+        <?php if ($_SESSION['role'] == 'superadmin') : ?>
+          <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#tables">
+              <i class="fas fa-user-cog"></i>
+              <p>Admins</p>
+              <span class="caret"></span>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav nav-collapse">
+                <li>
+                  <a href="index.php?controller=admin&action=index">
+                    <span class="sub-item">Admins Data</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="index.php?controller=admin&action=create">
+                    <span class="sub-item">Create new Admin</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        <?php endif; ?>
+        <li class="nav-item">
+          <a href="index.php?controller=contact&action=index">
+            <i class="fas fa-address-book"></i>
+            <p>Contacts</p>
+          </a>
+        </li>
+
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Kitchen</h4>
+        </li>
+
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#mealsMenu">
+            <i class="fas fa-utensils"></i>
+            <p>Meals</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="mealsMenu">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="index.php?page=meals/index">
+                  <span class="sub-item">All Meals</span>
+                </a>
+              </li>
+              <li>
+                <a href="index.php?page=meals/create">
+                  <span class="sub-item">Create New Meal</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#mealSelections">
             <i class="fas fa-clipboard-list"></i>
@@ -178,36 +211,6 @@
           </div>
         </li>
 
-
-        <?php if ($_SESSION['role'] == 'superadmin') : ?>
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#tables">
-              <i class="fas fa-user-cog"></i>
-              <p>Admins</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="index.php?controller=admin&action=index">
-                    <span class="sub-item">Admins Data</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="index.php?controller=admin&action=create">
-                    <span class="sub-item">Create new Admin</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        <?php endif; ?>
-        <li class="nav-item">
-          <a href="index.php?controller=contact&action=index">
-            <i class="fas fa-address-book"></i>
-            <p>Contacts</p>
-          </a>
-        </li>
       </ul>
     </div>
   </div>
