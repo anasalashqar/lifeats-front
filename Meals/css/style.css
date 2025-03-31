@@ -17,14 +17,15 @@ body {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 8px;
+    color: #1a2a3a;
   }
   
   .page-description {
     font-size: 1rem;
+    line-height: 1.5;
     color: #555;
-    margin-bottom: 32px;
-    white-space: normal;
-    word-wrap: break-word;
+    margin-bottom: 42px;
+    max-width: 700px;
   }
   
 h1.page-title {
