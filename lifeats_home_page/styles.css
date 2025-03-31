@@ -1,0 +1,241 @@
+/* Hero Section Styles */
+.hero-section {
+    min-height: 80vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('images/hero.webp');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 2rem;
+    border-radius: 2%;
+}
+
+.hero-section h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-section .btn {
+    background-color: #ff691c;
+    padding: 15px 15px;
+    color: white;
+   
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+/* ---------------- */
+/* our plans meal */
+.meal-plan-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  }
+  
+  .meal-plan-card:hover .meal-plan-image img {
+    transform: scale(1.05);
+  }
+  
+  .select-plan-btn:hover {
+    background-color: #e05a16;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .see-all-btn:hover {
+    background-color: #e05a16;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .meal-plans-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    
+    h2 {
+      font-size: 28px !important;
+    }
+    
+    .section-description {
+      font-size: 16px !important;
+    }
+  }
+
+
+/* How It Works Section */
+.how-it-works {
+    background-color: #fff9f2; /* Light orange background */
+    position: relative;
+    overflow: hidden;
+    color: #ff691c;
+}
+
+.how-it-works::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('images/orange-pattern.png') center/cover;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.step-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(255, 140, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    border-top: 4px solid var(--orange);
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.step-icon {
+    transition: transform 0.3s ease;
+}
+
+.step-card:hover .step-icon {
+    transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .how-it-works {
+        padding: 3rem 0;
+    }
+    
+    .step-card {
+        margin-bottom: 1.5rem;
+    }
+}
+/* FQA */
+/* FAQ Section - Matching Image Style */
+.faq-section {
+    background-color: #fff;
+}
+
+.faq-item {
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.faq-question {
+    transition: all 0.3s ease;
+}
+
+.faq-question:hover {
+    background-color: #f0f0f0 !important;
+}
+
+.nested-question {
+    transition: all 0.2s ease;
+}
+
+.nested-question:hover {
+    background-color: #e8e8e8 !important;
+}
+
+/* Button hover effect */
+.btn {
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e05e18 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 105, 28, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 3rem 0;
+    }
+    
+    .faq-question {
+        padding: 1rem !important;
+    }
+}
+/* people say */
+
+/* Animation for smoother transitions */
+.testimonial-slide {
+  transition: opacity 0.5s ease;
+}
+
+    
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .testimonial-slider {
+    padding: 0 20px;
+  }
+  
+  .testimonial-text {
+    font-size: 16px !important;
+  }
+}
+/* most meals */
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Pause animation on hover */
+  .meals-slider-container:hover .meals-slider-track {
+    animation-play-state: paused;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .meal-card {
+      width: 160px !important;
+    }
+    
+    .meal-card div {
+      width: 140px !important;
+      height: 140px !important;
+    }
+    
+    .meal-card p {
+      font-size: 14px !important;
+    }
+    
+    h2 {
+      font-size: 28px !important;
+    }
+  }
+
+  
+
+
+
