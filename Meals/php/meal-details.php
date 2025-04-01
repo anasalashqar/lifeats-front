@@ -3,330 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Low Carb Meal Plan</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-        }
-        .container {
-            max-width: 2500px;  
-            margin: 0 auto;
-            padding: 25px;  
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .left-column {
-            flex: 1;
-            min-width: 375px;  
-            padding-right: 25px;  
-        }
-        .right-column {
-            flex: 1;
-            min-width: 375px;  
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;  
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 25px;  
-            margin-left: 12px;  
-        }
-        .back-button {
-            font-size: 25px;  
-            text-decoration: none;
-            color: #333;
-        }
-        .description {
-            font-size: 18px;  
-            color: #666;
-            margin-bottom: 25px;  
-        }
-        .feature-image {
-            width: 100%;
-            height: 312px;  
-            object-fit: cover;
-            border-radius: 12px;  
-            margin-bottom: 25px;  
-            position: relative;
-        }
-        .feature-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-        }
-        .overlay-text {
-            position: absolute;
-            bottom: 25px;  
-            left: 25px;  
-            color: white;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-        }
-        .overlay-text h2 {
-            margin: 0;
-            font-size: 20px;  
-            font-weight: normal;
-        }
-        .overlay-text h3 {
-            margin: 0;
-            font-size: 30px;  
-            font-weight: bold;
-        }
-        .thumbnail-row {
-            display: flex;
-            overflow-x: auto;
-            gap: 12px;  
-            margin-bottom: 25px;  
-        }
-        .thumbnail {
-            width: 62px; 
-            height: 62px; 
-            border-radius: 6px;  
-            flex-shrink: 0;
-        }
-        .section-title {
-            font-size: 20px;  
-            font-weight: bold;
-            margin-bottom: 18px;  
-        }
-        .package-options {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
-            gap: 18px; 
-            margin-bottom: 31px;  
-        }
-        .package-option {
-            border: 1px solid #ddd;
-            border-radius: 10px;  
-            padding: 12px; 
-            cursor: pointer;
-            transition: border-color 0.3s;
-        }
-        .package-option.selected {
-            border-color: #ff6b35;
-        }
-        .package-image {
-            width: 100%;
-            height: 100px;  
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 6px;  
-        }
-        .package-name {
-            font-weight: bold;
-            font-size: 15px;  
-            margin-bottom: 6px;  
-        }
-        .package-details {
-            font-size: 13px;  
-            color: #666;
-        }
-        .customize-option {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;  
-            font-size: 15px;  
-            color: #ff6b35;
-        }
-        .calorie-options {
-            display: flex;
-            gap: 13px; 
-            margin-bottom: 25px;  
-        }
-        .calorie-option {
-            border: 1px solid #ddd;
-            border-radius: 25px;  
-            padding: 7px 19px;  
-            font-size: 17px;  
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .calorie-option.selected {
-            background-color: #ff6b35;
-            color: white;
-            border-color: #ff6b35;
-        }
-        .calorie-help {
-            display: flex;
-            align-items: center;
-            font-size: 15px;  
-            color: #666;
-            margin-bottom: 25px;  
-        }
-        .calorie-help i {
-            color: #ff6b35;
-            margin-right: 7px;  
-        }
-        .calorie-help a {
-            color: #ff6b35;
-            text-decoration: none;
-            margin-left: 7px;  
-        }
-        .trial-box {
-            background-color: #ff6b35;
-            color: white;
-            border-radius: 10px;  
-            padding: 18px;  
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;  
-        }
-        .trial-box .title {
-            font-weight: bold;
-            font-size: 20px;  
-        }
-        .trial-box .price {
-            font-size: 18px;  
-        }
-        .trial-box .button {
-            background-color: white;
-            color: #333;
-            border-radius: 25px;  
-            padding: 7px 19px;  
-            font-size: 15px;  
-            text-decoration: none;
-        }
-        .duration-options {
-            margin-bottom: 25px;  
-        }
-        .duration-options p {
-            font-size: 15px;  
-            color: #666;
-            margin-bottom: 13px;  
-        }
-        .duration-row {
-            display: flex;
-            gap: 13px;  
-            margin-bottom: 13px;  
-        }
-        .duration-option {
-            flex: 1;
-            border: 1px solid #ddd;
-            border-radius: 7px;  
-            padding: 13px;  
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s;
-            font-size: 17px;  
-        }
-        .duration-option.selected {
-            border-color: #ff6b35;
-        }
-        .discount-tag {
-            font-size: 13px;  
-            color: #ff6b35;
-            margin-top: 7px;  
-        }
-        .start-plan {
-            display: flex;
-            align-items: center;
-            font-size: 15px;  
-            color: #666;
-            margin-bottom: 25px;  
-        }
-        .start-plan i {
-            color: #ff6b35;
-            margin-right: 7px;  
-        }
-        .nutrition-breakdown {
-            margin-bottom: 25px;  
-        }
-        .nutrition-bars {
-            display: flex;
-            gap: 13px;  
-            margin-bottom: 13px;  
-        }
-        .nutrition-bar {
-            flex: 1;
-            border-radius: 7px;  
-            padding: 13px;  
-            font-size: 15px;  
-        }
-        .nutrition-bar.proteins {
-            background-color: #e8f5e9;
-        }
-        .nutrition-bar.carbs {
-            background-color: #fff3e0;
-        }
-        .nutrition-bar.fat {
-            background-color: #e1f5fe;
-        }
-        .nutrition-name {
-            font-weight: bold;
-            margin-bottom: 7px;  
-        }
-        .nutrition-value {
-            font-size: 16px;  
-        }
-        .nutrition-disclaimer {
-            font-size: 13px;  
-            color: #666;
-            margin-bottom: 25px;  
-        }
-        .view-menu-button {
-            display: block;
-            width: 100%;
-            padding: 13px;  
-            border: 1px solid #ddd;
-            border-radius: 7px;  
-            text-align: center;
-            text-decoration: none;
-            color: #333;
-            margin-bottom: 25px;  
-        }
-        .price-summary {
-            border-top: 1px solid #ddd;
-            padding-top: 18px;  
-            margin-bottom: 25px;  
-        }
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 13px;  
-            font-size: 16px;  
-        }
-        .price-row.total {
-            font-weight: bold;
-        }
-        .vat-note {
-            font-size: 13px;  
-            color: #666;
-            text-align: right;
-        }
-        .subscribe-button {
-            display: block;
-            width: 100%;
-            padding: 18px; 
-            background-color: #000;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 7px; 
-            font-weight: bold;
-        }
-    </style>
+    <title>Meal Plan Details</title>
+    <link rel="stylesheet" href="../css/meal-details.css">
 </head>
 <body>
     <?php
-    // Example data - in a real application, this would come from a database
     $packageOptions = [
-    
         [
             'name' => 'Full Day Standard',
             'details' => 'Breakfast + Lunch + Dinner',
             'image' => '../img/Full_Day.webp'
         ]
-      
     ];
     
     $durationOptions = [20];
@@ -336,26 +23,18 @@
     <div class="container">
         <div class="left-column">
             <div class="header">
-                <a href="#" class="back-button">←</a>
-                <h1>Low Carb Meal Plan</h1>
+                <a href="subscription-plans.php" class="back-button">←</a>
+                <h1 id="mealName">Loading...</h1>
             </div>
-            <div class="description">
-                Reach your goals & curb your cravings with low carb, high protein meals.
+            <div class="description" id="mealDescription">
+                Loading...
             </div>
             <div class="feature-image">
-                <img src="https://via.placeholder.com/600x400" alt="Low Carb Meal">
+                <img id="mealImage" src="https://via.placeholder.com/600x400" alt="Meal Plan">
                 <div class="overlay-text">
                     <h2>Optimal for</h2>
-                    <h3>Toning</h3>
+                    <h3 id="mealGoal">Loading...</h3>
                 </div>
-            </div>
-            <div class="thumbnail-row">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
-                <img src="https://via.placeholder.com/50" alt="Meal Thumbnail" class="thumbnail">
             </div>
         </div>
 
@@ -367,12 +46,13 @@
                     <img src="<?php echo $option['image']; ?>" alt="<?php echo $option['name']; ?>" class="package-image">
                     <div class="package-name"><?php echo $option['name']; ?></div>
                     <div class="package-details"><?php echo $option['details']; ?></div>
+
                 </div>
                 <?php endforeach; ?>
             </div>
 
             <div class="customize-option">
-                <i>●</i> Vegan, pescatarian, or with other preferences? Fully customize your plan after payment.
+                <i>● </i> Vegan, pescatarian, or with other preferences? Fully customize your plan after payment.
             </div>
 
             <div class="section-title">Choose your calories</div>
@@ -388,7 +68,7 @@
             <div class="trial-box">
                 <div>
                     <div class="title">Try Right Bite for 1 Day?</div>
-                    <div class="price">Starting AED 41</div>
+                    <div class="price" id="trialPrice">Starting JOD 41</div>
                 </div>
                 <a href="#" class="button">Click here</a>
             </div>
@@ -409,8 +89,8 @@
             </div>
 
             <div class="start-plan">
-                <i>●</i> Start your plan as early as Wed 3 Apr
-                <br>You will be able to choose the start date that suits you after checkout.
+                <i>●</i> Start your plan as early as <?php echo date('D j M', strtotime('+2 days')); ?><br>
+                You will be able to choose the start date that suits you after checkout.
             </div>
 
             <div class="section-title">Nutrition breakdown</div>
@@ -436,16 +116,16 @@
 
             <div class="price-summary">
                 <div class="price-row">
-                    <div></div>
-                    <div></div>
+                    <div>Package</div>
+                    <div id="mealPrice">Loading...</div>
                 </div>
                 <div class="price-row">
-                    <div></div>
-                    <div></div>
+                    <div>Duration</div>
+                    <div>20 days</div>
                 </div>
                 <div class="price-row total">
                     <div>Subtotal</div>
-                    <div>AED 328.00</div>
+                    <div id="mealPriceTotal">Loading...</div>
                 </div>
                 <div class="vat-note">(incl. VAT)</div>
             </div>
@@ -455,18 +135,65 @@
     </div>
 
     <script>
-        // Simple interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Package selection
-            const packageOptions = document.querySelectorAll('.package-option');
-            packageOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    packageOptions.forEach(o => o.classList.remove('selected'));
-                    this.classList.add('selected');
-                });
-            });
+        // Load meal details from localStorage first
+        function loadMealDetails() {
+            const storedPlan = localStorage.getItem('selectedPlan');
+            if (storedPlan) {
+                const planData = JSON.parse(storedPlan);
+                updatePageWithPlanData(planData);
+                return true;
+            }
+            return false;
+        }
+        
+        function updatePageWithPlanData(planData) {
+            document.getElementById("mealName").textContent = planData.name;
+            document.getElementById("mealDescription").textContent = planData.description;
+            document.getElementById("mealImage").src = planData.image_url;
+            document.getElementById("mealGoal").textContent = planData.goal;
+            const formattedPrice = `JOD ${Number(planData.price).toFixed(2)}`;
+            document.getElementById("mealPrice").textContent = formattedPrice;
+            document.getElementById("mealPriceTotal").textContent = formattedPrice;
+            const trialPrice = (Number(planData.price) / 20).toFixed(2);
+            document.getElementById("trialPrice").textContent = `Starting JOD ${trialPrice}`;
+            document.title = planData.name;
+        }
+        
+        async function fetchMealDetailsFromApi() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const subscriptionId = urlParams.get('id');
+            if (!subscriptionId) {
+                console.error("No subscription ID found in URL");
+                document.getElementById("mealName").textContent = "Error: No plan selected";
+                return;
+            }
+            try {
+                const response = await fetch(`http://localhost:8000/api/subscriptions/${subscriptionId}`);
+                if (!response.ok) {
+                    throw new Error(`API returned status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (data) {
+                    const planData = data.data || data;
+                    updatePageWithPlanData(planData);
+                    localStorage.setItem('selectedPlan', JSON.stringify(planData));
+                } else {
+                    console.error("Invalid data structure received from API:", data);
+                    document.getElementById("mealName").textContent = "Error loading data";
+                }
+            } catch (error) {
+                console.error("Error fetching subscription details:", error);
+                document.getElementById("mealName").textContent = "Error loading data";
+                document.getElementById("mealDescription").textContent = "Please try again later.";
+            }
+        }
 
-            // Calorie selection
+        document.addEventListener("DOMContentLoaded", function() {
+            const loadedFromStorage = loadMealDetails();
+            if (!loadedFromStorage) {
+                fetchMealDetailsFromApi();
+            }
+            
             const calorieOptions = document.querySelectorAll('.calorie-option');
             calorieOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -474,8 +201,7 @@
                     this.classList.add('selected');
                 });
             });
-
-            // Duration selection
+            
             const durationOptions = document.querySelectorAll('.duration-option');
             durationOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -483,6 +209,48 @@
                     this.classList.add('selected');
                 });
             });
+            
+            const packageOptions = document.querySelectorAll('.package-option');
+            packageOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    packageOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            const subscribeButton = document.querySelector('.subscribe-button');
+subscribeButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    const planData = JSON.parse(localStorage.getItem('selectedPlan'));
+    const selectedCalorie = document.querySelector('.calorie-option.selected').textContent;
+    const selectedDuration = document.querySelector('.duration-option.selected').textContent;
+    const selectedPackage = document.querySelector('.package-option.selected .package-name').textContent;
+    
+    const packagePrice = parseFloat(planData.price);
+    const totalPrice = packagePrice; 
+    
+    const checkoutData = {
+        plan: {
+            name: planData.name,
+            type: selectedPackage,
+            calories: selectedCalorie + ' Kcal',
+            days: selectedDuration + ' days'
+        },
+        pricing: {
+            package_price: packagePrice,
+            total: totalPrice
+        },
+        currency: 'AED',
+        start_date: new Date(Date.now() + (2 * 24 * 60 * 60 * 1000)).toLocaleDateString('en-US', {
+            weekday: 'short', 
+            day: 'numeric', 
+            month: 'short'
+        })
+    };
+    
+    localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+    window.location.href = 'Checkout.php';
+});
+           
         });
     </script>
 </body>

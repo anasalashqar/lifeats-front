@@ -23,23 +23,29 @@ body {
   .page-description {
     font-size: 1rem;
     line-height: 1.5;
-    color: #555;
+    color: #904646;
     margin-bottom: 42px;
     max-width: 700px;
   }
   
-h1.page-title {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
+  h1.page-title {
+    font-size: 3rem;              
+    font-weight: 800;             
+    color: #0f172a;               
     text-align: center;
-  }
-  
-  p.page-description {
+    margin-bottom: 16px;
+}
+
+p.page-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto 40px auto;
     text-align: center;
-    font-size: 1.1rem;
-    margin-bottom: 30px;
-    color: #555;
-  }
+    color: #334155;              
+}
+
+
   
   .categories-grid {
     display: grid;
@@ -56,10 +62,16 @@ h1.page-title {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  .category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  .meal-card:hover {
+    transform: scale(1.03); 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
+  .meal-card {
+    cursor: pointer;
+  }
+  
+  
   
   .category-image {
     width: 100%;
