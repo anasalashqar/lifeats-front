@@ -143,8 +143,9 @@
                 const data = await res.json();
 
                 if (res.ok) {
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('user', JSON.stringify(data.user));
+                    setCookie('token', data.token);
+                    setCookie('user', JSON.stringify(data.user));
+
                     messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Welcome to Lifeats! Redirecting...';
 
@@ -159,8 +160,12 @@
                 console.error(error);
             }
         });
-    </script>
 
+        function setCookie(name, value, days = 1) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+        }
+    </script>
 </body>
 
 </html>

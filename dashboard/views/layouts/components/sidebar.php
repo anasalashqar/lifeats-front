@@ -4,7 +4,7 @@
     <div class="logo-header" data-background-color="dark">
       <a href="index.php?controller=dashboard&action=index" class="logo">
         <img
-          src="<?php echo ($_SESSION['role'] == 'superadmin') ? 'assets/img/superadmin.png' : 'assets/img/dash-logo.png'; ?>"
+          src="assets/img/dash-logo.png"
           alt="navbar brand"
           class="navbar-brand"
           height="20" />
@@ -118,7 +118,7 @@
 
 
 
-        <?php if ($_SESSION['role'] == 'superadmin') : ?>
+        
           <li class="nav-item">
             <a data-bs-toggle="collapse" href="#tables">
               <i class="fas fa-user-cog"></i>
@@ -140,7 +140,6 @@
               </ul>
             </div>
           </li>
-        <?php endif; ?>
         <li class="nav-item">
           <a href="index.php?controller=contact&action=index">
             <i class="fas fa-address-book"></i>

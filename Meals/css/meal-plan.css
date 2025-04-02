@@ -1,107 +1,128 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fff;
-    margin: 0;
-    padding: 0;
-    color: #1a2a3a;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 32px 16px;
-  }
-  
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #1a2a3a;
-  }
-  
-  .page-description {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #555;
-    margin-bottom: 42px;
-    max-width: 700px;
-  }
-  
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 24px;
-  }
-  
-  .category-card {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .category-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
-  }
-  
-  .category-image {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    display: block;
-  }
-  
-  .category-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 250px;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3));
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 20px;
-    box-sizing: border-box;
-    color: white;
-  }
-  
-  .category-tag {
-    font-size: 1.1rem;
-    font-weight: normal;
-    margin-bottom: 5px;
-  }
-  
-  .category-highlight {
-    font-size: 2rem;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  .category-content {
-    padding: 20px;
-  }
-  
-  .category-name {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #1a2a3a;
-  }
-  
-  .category-description {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 20px;
-    line-height: 1.4;
-  }
-  
-  .category-price {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #1a2a3a;
-  }
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+  color: #1a2a3a;
+}
+.pagination-dots {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 8px;
+}
+
+.pagination-dots .dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ff691c;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.pagination-dots .dot.active {
+  opacity: 1;
+  transform: scale(1.4);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1a2a3a;
+}
+
+.page-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 42px;
+  max-width: 700px;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.category-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.category-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.category-tag {
+  font-size: 1.1rem;
+  font-weight: normal;
+  margin-bottom: 5px;
+}
+
+.category-highlight {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.category-content {
+  padding: 20px;
+}
+
+.category-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #1a2a3a;
+}
+
+.category-description {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.category-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #1a2a3a;
+}

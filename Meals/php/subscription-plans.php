@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subscription Plans</title>
   <link rel="stylesheet" href="../css/subscription-plans.css" />
-  
+
 </head>
+
 <body>
+  <?php
+  require_once __DIR__ . "/../../Homepage/includes/navbar.php";
+  ?>
+
   <div class="container">
     <h1 class="page-title">Choose the perfect plan for your goals.</h1>
     <p class="page-description">Get fresh, nutritious meals delivered with a plan that works for you.</p>
@@ -17,10 +23,13 @@
     </div>
   </div>
 
+  <?php
+  require_once __DIR__ . "/../../Homepage/includes/footer.php";
+  ?>
   <script>
     async function loadSubscriptions() {
       try {
-        const response = await fetch("http://localhost:8000/api/subscriptions");
+        const response = await fetch("http://127.0.0.1:8000/api/subscriptions");
         const data = await response.json();
 
         if (Array.isArray(data)) {
@@ -33,7 +42,7 @@
 
             card.onclick = function() {
               // Store the plan data in localStorage before navigating
-              localStorage.setItem('selectedPlan', JSON.stringify(plan));
+              // localStorage.setItem('selectedPlan', JSON.stringify(plan));
               window.location.href = `meal-details.php?id=${plan.id}`;
             };
 
@@ -60,4 +69,5 @@
     document.addEventListener("DOMContentLoaded", loadSubscriptions);
   </script>
 </body>
+
 </html>

@@ -164,8 +164,10 @@
                 const data = await res.json();
 
                 if (res.ok) {
-                    localStorage.setItem('token', data.token || '');
-                    localStorage.setItem('user', JSON.stringify(data));
+                    // Store token and user in cookies
+                    setCookie('token', data.token || '');
+                    setCookie('user', JSON.stringify(data.user || {}));
+
                     messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Account created! Redirecting...';
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Plan Details</title>
     <link rel="stylesheet" href="../css/meal-details.css">
 </head>
+
 <body>
     <?php
     $packageOptions = [
@@ -15,11 +17,13 @@
             'image' => '../img/Full_Day.webp'
         ]
     ];
-    
+
     $durationOptions = [20];
     $discounts = [null];
     ?>
-
+    <?php
+    require_once __DIR__ . "/../../Homepage/includes/navbar.php";
+    ?>
     <div class="container">
         <div class="left-column">
             <div class="header">
@@ -42,12 +46,12 @@
             <div class="section-title">Choose your package type</div>
             <div class="package-options">
                 <?php foreach ($packageOptions as $index => $option): ?>
-                <div class="package-option <?php echo $index === 0 ? 'selected' : ''; ?>">
-                    <img src="<?php echo $option['image']; ?>" alt="<?php echo $option['name']; ?>" class="package-image">
-                    <div class="package-name"><?php echo $option['name']; ?></div>
-                    <div class="package-details"><?php echo $option['details']; ?></div>
+                    <div class="package-option <?php echo $index === 0 ? 'selected' : ''; ?>">
+                        <img src="<?php echo $option['image']; ?>" alt="<?php echo $option['name']; ?>" class="package-image">
+                        <div class="package-name"><?php echo $option['name']; ?></div>
+                        <div class="package-details"><?php echo $option['details']; ?></div>
 
-                </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
 
@@ -78,12 +82,12 @@
                 <p>Full flexibility of which days you can eat your delivery, including Saturday and Sunday.</p>
                 <div class="duration-row">
                     <?php foreach ($durationOptions as $index => $days): ?>
-                    <div class="duration-option <?php echo $index === 0 ? 'selected' : ''; ?>">
-                        <?php echo $days; ?>
-                        <?php if ($discounts[$index]): ?>
-                            <div class="discount-tag"><?php echo $discounts[$index]; ?></div>
-                        <?php endif; ?>
-                    </div>
+                        <div class="duration-option <?php echo $index === 0 ? 'selected' : ''; ?>">
+                            <?php echo $days; ?>
+                            <?php if ($discounts[$index]): ?>
+                                <div class="discount-tag"><?php echo $discounts[$index]; ?></div>
+                            <?php endif; ?>
+                        </div>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -133,7 +137,9 @@
             <a href="#" class="subscribe-button">Subscribe</a>
         </div>
     </div>
-
+    <?php
+    require_once __DIR__ . "/../../Homepage/includes/footer.php";
+    ?>
     <script>
         // Load meal details from localStorage first
         function loadMealDetails() {
@@ -145,7 +151,7 @@
             }
             return false;
         }
-        
+
         function updatePageWithPlanData(planData) {
             document.getElementById("mealName").textContent = planData.name;
             document.getElementById("mealDescription").textContent = planData.description;
@@ -158,7 +164,7 @@
             document.getElementById("trialPrice").textContent = `Starting JOD ${trialPrice}`;
             document.title = planData.name;
         }
-        
+
         async function fetchMealDetailsFromApi() {
             const urlParams = new URLSearchParams(window.location.search);
             const subscriptionId = urlParams.get('id');
@@ -168,7 +174,7 @@
                 return;
             }
             try {
-                const response = await fetch(`http://localhost:8000/api/subscriptions/${subscriptionId}`);
+                const response = await fetch(`http://127.0.0.1:8000/api/subscriptions/${subscriptionId}`);
                 if (!response.ok) {
                     throw new Error(`API returned status: ${response.status}`);
                 }
@@ -193,7 +199,7 @@
             if (!loadedFromStorage) {
                 fetchMealDetailsFromApi();
             }
-            
+
             const calorieOptions = document.querySelectorAll('.calorie-option');
             calorieOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -201,7 +207,7 @@
                     this.classList.add('selected');
                 });
             });
-            
+
             const durationOptions = document.querySelectorAll('.duration-option');
             durationOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -209,7 +215,7 @@
                     this.classList.add('selected');
                 });
             });
-            
+
             const packageOptions = document.querySelectorAll('.package-option');
             packageOptions.forEach(option => {
                 option.addEventListener('click', function() {
@@ -218,40 +224,41 @@
                 });
             });
             const subscribeButton = document.querySelector('.subscribe-button');
-subscribeButton.addEventListener('click', function(e) {
-    e.preventDefault();
-    const planData = JSON.parse(localStorage.getItem('selectedPlan'));
-    const selectedCalorie = document.querySelector('.calorie-option.selected').textContent;
-    const selectedDuration = document.querySelector('.duration-option.selected').textContent;
-    const selectedPackage = document.querySelector('.package-option.selected .package-name').textContent;
-    
-    const packagePrice = parseFloat(planData.price);
-    const totalPrice = packagePrice; 
-    
-    const checkoutData = {
-        plan: {
-            name: planData.name,
-            type: selectedPackage,
-            calories: selectedCalorie + ' Kcal',
-            days: selectedDuration + ' days'
-        },
-        pricing: {
-            package_price: packagePrice,
-            total: totalPrice
-        },
-        currency: 'AED',
-        start_date: new Date(Date.now() + (2 * 24 * 60 * 60 * 1000)).toLocaleDateString('en-US', {
-            weekday: 'short', 
-            day: 'numeric', 
-            month: 'short'
-        })
-    };
-    
-    localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
-    window.location.href = 'Checkout.php';
-});
-           
+            subscribeButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const planData = JSON.parse(localStorage.getItem('selectedPlan'));
+                const selectedCalorie = document.querySelector('.calorie-option.selected').textContent;
+                const selectedDuration = document.querySelector('.duration-option.selected').textContent;
+                const selectedPackage = document.querySelector('.package-option.selected .package-name').textContent;
+
+                const packagePrice = parseFloat(planData.price);
+                const totalPrice = packagePrice;
+
+                const checkoutData = {
+                    plan: {
+                        name: planData.name,
+                        type: selectedPackage,
+                        calories: selectedCalorie + ' Kcal',
+                        days: selectedDuration + ' days'
+                    },
+                    pricing: {
+                        package_price: packagePrice,
+                        total: totalPrice
+                    },
+                    currency: 'AED',
+                    start_date: new Date(Date.now() + (2 * 24 * 60 * 60 * 1000)).toLocaleDateString('en-US', {
+                        weekday: 'short',
+                        day: 'numeric',
+                        month: 'short'
+                    })
+                };
+
+                localStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+                window.location.href = 'Checkout.php';
+            });
+
         });
     </script>
 </body>
+
 </html>

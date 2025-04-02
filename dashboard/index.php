@@ -3,7 +3,7 @@ session_start();
 
 // ROUTING ARRAY FOR `?page=...` ROUTES
 $routes = [
-    "" => "views/admin/dashboard.php",
+    "" => "views/meals/index.php",
     // Meals
     'meals/index' => 'views/meals/index.php',
     'meals/create' => 'views/meals/create.php',
