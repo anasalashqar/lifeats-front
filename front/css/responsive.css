@@ -1,0 +1,156 @@
+/* =======================================
+   LifeEats CSS - Responsive Styles
+   ======================================= */
+
+/* Extra Small Devices (phones, 576px and down) */
+@media (max-width: 575.98px) {
+    /* Typography */
+    .display-4 {
+        font-size: 2.5rem;
+    }
+    
+    .display-5 {
+        font-size: 2rem;
+    }
+    
+    .lead {
+        font-size: 1.1rem;
+    }
+    
+    /* Layout */
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    /* Header & Nav */
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .logo {
+        height: 30px;
+    }
+    
+    /* Hero section */
+    header .btn-lg {
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+    }
+    
+    /* Cards & Components */
+    .feature-icon, .category-icon {
+        width: 50px;
+        height: 50px;
+    }
+    
+    /* Forms */
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .input-group .form-control {
+        border-radius: 4px !important;
+        margin-bottom: 10px;
+    }
+    
+    .input-group .btn {
+        border-radius: 4px !important;
+        width: 100%;
+    }
+    
+    /* Contact page */
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Small Devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Typography */
+    .display-4 {
+        font-size: 2.75rem;
+    }
+    
+    .display-5 {
+        font-size: 2.25rem;
+    }
+    
+    /* Cards & Components */
+    .feature-icon, .category-icon {
+        width: 55px;
+        height: 55px;
+    }
+    
+    /* Hero section */
+    header .btn-lg {
+        padding: 0.65rem 1.25rem;
+    }
+}
+
+/* Medium Devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Typography */
+    .display-4 {
+        font-size: 3rem;
+    }
+    
+    .display-5 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Large Devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* No specific styles needed for this breakpoint */
+}
+
+/* Extra Large Devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Specific Component Responsiveness */
+
+/* Meal Badges */
+@media (max-width: 767.98px) {
+    .meal-badges .badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+/* Footer */
+@media (max-width: 767.98px) {
+    footer .text-md-end {
+        text-align: center !important;
+        margin-top: 1rem;
+    }
+    
+    footer .d-flex.flex-column.flex-md-row {
+        text-align: center;
+    }
+}
+
+/* Blog Cards */
+@media (max-width: 991.98px) {
+    .blog-card .card-img-top {
+        height: 180px;
+    }
+}
+
+/* Contact Form */
+@media (max-width: 767.98px) {
+    .card.border-0.shadow-sm {
+        padding: 1.5rem !important;
+    }
+}
+
+/* Category Cards */
+@media (max-width: 767.98px) {
+    .category-card {
+        margin-bottom: 1rem;
+    }
+}
